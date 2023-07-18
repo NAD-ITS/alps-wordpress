@@ -99,6 +99,7 @@ class TemplateHelpers {
         $headerTitle = $post->post_title;
         $headerDesc  = $post->post_excerpt;
         $headerDate  = get_the_date('', $post->ID);
+        $headerKicker = get_post_meta($post->ID, '_kicker', true);
 
         $headerCategory = '';
         $cat = get_the_category($post->ID);
@@ -127,6 +128,7 @@ class TemplateHelpers {
             'headerCategory'  => $headerCategory,
             'headerImageCaption' => $headerImageCaption,
             'headerImages' => $headerImages,
+            'headerKicker' => $headerKicker
         ];
     }
 }
