@@ -1,11 +1,7 @@
 @php
   use Roots\Sage\Titles;
 
-  $cf = get_option('alps_cf_converted');
-  $cf_ = '';
-  if ($cf) {
-    $cf_ = '_';
-  }
+  $cf_ = '_';
 
   // SET TO INITIALIZE / OVERRIDE
   $header_background_image = '';
@@ -55,6 +51,12 @@
       $header_background_image = get_post_thumbnail_id($post->ID);
     }
   }
+
+  $page_header_classes = 'c-page-header c-page-header__long u-theme--background-color--dark  u-space--zero--top';
+  $feature_image_hero = get_post_meta($post->ID, $cf_.'featured_image_hero_layout', true);
+  if ($feature_image_hero == 'page-header'){
+    $page_header_classes = 'c-page-header c-page-header__long c-page-header__longer u-theme--background-color--dark  u-space--zero--top';
+  }
 @endphp
 
 @if ($header_background_image)
@@ -85,7 +87,7 @@
 @endif
 
 @if (empty($remove_header))
-  <header class="c-page-header c-page-header__long u-theme--background-color--dark  u-space--zero--top {{ $page_header_class }}">
+  <header class="{{ $page_header_classes }} {{ $page_header_class }}">
     <div class="c-page-header__long--inner l-grid l-grid--7-col {{ $page_header_inner_class }}">
       <div class="c-page-header__content c-page-header__long__content l-grid-wrap l-grid-wrap--5-of-7 u-border--left {{ $page_header_content_class }}">
         @if ($long_header_kicker)
