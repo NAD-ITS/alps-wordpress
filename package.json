@@ -19,7 +19,8 @@
     "translate:js": "wp i18n make-json ./resources/lang --pretty-print",
     "translate:mo": "wp i18n make-mo ./resources/lang ./resources/lang",
     "wp:theme:build": "node devtools/runner.js theme:build",
-    "wp:theme:release": "node devtools/runner.js theme:release",
+    "wp:theme:draft-release": "node devtools/runner.js theme:draft-release",
+    "wp:theme:manual-release": "node devtools/runner.js theme:manual-release",
     "project:set-version": "node devtools/runner.js project:set-version",
     "assets-compile": "node devtools/scripts/styles/compile.js"
   },
