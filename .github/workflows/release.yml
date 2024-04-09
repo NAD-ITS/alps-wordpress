@@ -2,10 +2,10 @@ name: Publish PROD ALPS Theme
 
 on:
   workflow_dispatch:
-  inputs:
-    releaseId:
-      description: 'Release ID to publish'
-      required: true
+    inputs:
+      releaseId:
+        description: 'Release ID to publish'
+        required: true
 
 jobs:
   publish:
