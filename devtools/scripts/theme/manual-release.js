@@ -142,26 +142,12 @@ const manualRelease = async (opts) => {
       owner: githubOwner,
       repo: githubRepo,
       release_id: existingRelease.data.id,
-      draft: false
+      draft: false,
+      prerelease: false
     });
   } catch (e) {}
 
   logger.info(`🍀 Release ${chalk.green(tag)} published on GitHub`);
-}
-
-async function downloadFile(url, folderPath, fileName) {
-  const filePath = folderPath + fileName;
-  const fileStream = fs.createWriteStream(filePath);
-
-  console.log("Downloading is started...")
-  await got.stream(url)
-    .pipe(fileStream)
-    .on('finish', () => {
-      console.log(`The file was successfully downloaded and saved in: ${filePath}`);
-    })
-    .on('error', (error) => {
-      console.error('Error downloading the file:', error);
-    });
 }
 
 module.exports = manualRelease;
