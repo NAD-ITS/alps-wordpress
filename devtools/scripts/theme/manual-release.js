@@ -56,6 +56,8 @@ const manualRelease = async (opts) => {
         }
       }
 
+      logger.info("Existing Release: " + JSON.stringify(existingRelease));
+
       if (downloadUrl === '') {
         logger.info("❌ Download URL is empty! Assets in existingRelease: " + assets.length + ". Dist FileName: " + distFileName + ". Existing Release: " + JSON.stringify(existingRelease));
         return false;
