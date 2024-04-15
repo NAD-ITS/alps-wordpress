@@ -61,7 +61,7 @@ const pluginRelease = async (opts) => {
         repo: githubRepo,
         tag_name: tag,
         name: tag,
-        draft: true,
+        prerelease: true,
         body: releaseDesc.join("\n"),
     });
 
