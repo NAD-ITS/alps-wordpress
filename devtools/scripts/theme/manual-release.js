@@ -7,6 +7,7 @@ const getPackageInfo = require("../../lib/get-package-info");
 const core = require('@actions/core');
 const getThemeMeta = require('../../lib/get-theme-meta');
 const { DateTime } = require('luxon');
+const {fi} = require("date-fns/locale");
 require('dotenv').config()
 
 const R2_BUCKET_NAME = 'alps';
@@ -36,6 +37,8 @@ const manualRelease = async (opts) => {
   const distFileName = `alps-wordpress-v${pkg.version}.zip`;
   const metadataFileName = `alps-wordpress-v3.json`;
 
+  fs.mkdirSync("build");
+
   let existingRelease = '';
   try {
     existingRelease = await octokit.repos.getReleaseByTag({
@@ -57,6 +60,11 @@ const manualRelease = async (opts) => {
       if (downloadUrl === '') {
         logger.info("❌ Download URL is empty! Assets in existingRelease: " + assets.length + ". Dist FileName: " + distFileName + ". Existing Release: " + JSON.stringify(existingRelease));
         return false;
+      }
+
+      const files = fs.readdirSync('build');
+      for(const file of files) {
+        console.log("FILE: " + JSON.stringify(file))
       }
 
       const filePath = buildDir + distFileName;
