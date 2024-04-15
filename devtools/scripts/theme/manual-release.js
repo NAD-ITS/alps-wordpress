@@ -84,10 +84,9 @@ const manualRelease = async (opts) => {
       .on('finish', resolve)
       .on('error', (error) => {
         console.error('Error downloading the file:', error);
-        reject(error);  // Отклоняем Promise при ошибке
+        reject(error);
       });
 
-    // Начинаем скачивание
     got.stream(downloadUrl).pipe(fileStream);
   });
 
@@ -117,7 +116,7 @@ const manualRelease = async (opts) => {
   themeMeta.download_url = themeMeta.download_url
     .replace('{file}', `alps-wordpress-v${pkg.version}.zip`);
 
-  await fs.writeFile(`${buildDir}alps-wordpress-v3.json`, JSON.stringify(themeMeta, null, 2));
+  await fs.writeFileSync(`${buildDir}alps-wordpress-v3.json`, JSON.stringify(themeMeta, null, 2));
   logger.info(`💚 ALPS Theme metadata saved to ${chalk.yellow(`alps-wordpress-v3.json`)}`);
 
   // Upload JSON to R2
