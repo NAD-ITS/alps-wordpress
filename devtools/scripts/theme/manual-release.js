@@ -66,6 +66,8 @@ const manualRelease = async (opts) => {
         console.log("FILE: " + JSON.stringify(file))
       }
 
+      console.log("FOLDER IS exists: " + fs.existsSync('build'));
+
       const filePath = buildDir + distFileName;
       const fileStream = fs.createWriteStream(filePath);
 
