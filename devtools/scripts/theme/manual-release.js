@@ -49,14 +49,13 @@ const manualRelease = async (opts) => {
     });
 
     const assets = existingRelease.data.assets;
+    logger.info("Existing Release: " + JSON.stringify(existingRelease));
     if (assets.length > 0) {
       for (const asset of assets) {
         if (asset.name === distFileName) {
           downloadUrl = asset.browser_download_url;
         }
       }
-
-      logger.info("Existing Release: " + JSON.stringify(existingRelease));
 
       if (downloadUrl === '') {
         logger.info("❌ Download URL is empty! Assets in existingRelease: " + assets.length + ". Dist FileName: " + distFileName + ". Existing Release: " + JSON.stringify(existingRelease));
