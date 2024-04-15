@@ -128,7 +128,7 @@ async function downloadFile(url, folderPath, fileName) {
   const fileStream = fs.createWriteStream(filePath);
 
   console.log("Downloading is started...")
-  got.stream(url)
+  await got.stream(url)
     .pipe(fileStream)
     .on('finish', () => {
       console.log(`The file was successfully downloaded and saved in: ${filePath}`);
