@@ -57,7 +57,8 @@ const manualRelease = async (opts) => {
         repo: githubRepo,
         release_id: existingRelease.data.id,
         draft: false,
-        prerelease: false
+        prerelease: false,
+        make_latest: true
       });
     } catch (e) {}
 
