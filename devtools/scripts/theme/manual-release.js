@@ -48,9 +48,9 @@ const manualRelease = async (opts) => {
     if (assets.length > 0) {
       let downloadUrl = '';
       for (const asset in assets) {
-        logger.info("Asset name: " + asset.name + " :: " + asset.name === distFileName)
+        logger.info("Asset name: " + asset.name + " :: " + asset.browser_download_url + " :: " + asset.name === distFileName);
         if (asset.name === distFileName) {
-          downloadUrl = asset.browser_download_url
+          downloadUrl = asset.browser_download_url;
         }
       }
 
