@@ -25,7 +25,7 @@ const manualRelease = async (opts) => {
 
   // Extract git tag
   // Get the value of an input
-  const tag = core.getInput('releaseId');
+  const tag = process.env.RELEASE_ID;
   const match = tag.match(/v\d+\.\d+\.\d+\.\d+$/);
   if (!match) {
     throw new Error(`Invalid tag name for release: "${tag}"`);
