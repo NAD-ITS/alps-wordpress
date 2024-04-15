@@ -47,7 +47,8 @@ const manualRelease = async (opts) => {
     const assets = existingRelease.data.assets;
     if (assets.length > 0) {
       let downloadUrl = '';
-      for (const asset in assets) {
+      logger.info("ASSETS: " + JSON.stringify(assets));
+      for (let asset in assets) {
         logger.info("Asset name: " + asset.name + " :: " + asset.browser_download_url + " :: " + asset.name === distFileName);
         if (asset.name === distFileName) {
           downloadUrl = asset.browser_download_url;
