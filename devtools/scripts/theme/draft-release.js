@@ -3,8 +3,6 @@ const chalk = require('chalk');
 const { Octokit } = require("@octokit/rest");
 const getChangelog = require('../../lib/get-changelog');
 const getPackageInfo = require('../../lib/get-package-info');
-const FormData = require('form-data');
-const got = require("got");
 require('dotenv').config()
 
 const pluginRelease = async (opts) => {

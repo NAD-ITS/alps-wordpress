@@ -29,7 +29,7 @@ jobs:
           npm run wp:theme:build
 
       - id: publish
-        name: Publish Theme
+        name: Publish Draft Theme
         run: |
           npm run wp:theme:draft-release
         env:

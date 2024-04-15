@@ -4,6 +4,9 @@ const got = require("got");
 const chalk = require("chalk");
 const { Octokit } = require("@octokit/rest");
 const getPackageInfo = require("../../lib/get-package-info");
+const core = require('@actions/core');
+const getThemeMeta = require('../../lib/get-theme-meta');
+const { DateTime } = require('luxon');
 require('dotenv').config()
 
 const R2_BUCKET_NAME = 'alps';
@@ -13,11 +16,53 @@ const manualRelease = async (opts) => {
   const { logger } = opts;
 
   const pkg = await getPackageInfo();
+  const githubToken = env.GITHUB_TOKEN || null;
+  const [githubOwner, githubRepo] = env.GITHUB_REPOSITORY.split('/');
+
+  const octokit = new Octokit({
+    auth: githubToken,
+  });
+
+  // Extract git tag
+  // Get the value of an input
+  const tag = core.getInput('releaseId');
+  const match = tag.match(/v\d+\.\d+\.\d+\.\d+$/);
+  if (!match) {
+    throw new Error(`Invalid tag name for release: "${tag}"`);
+  }
 
   const buildDir = 'build/';
   const localFileName = `${pkg.name}.zip`;
   const distFileName = `alps-wordpress-v${pkg.version}.zip`;
   const metadataFileName = `alps-wordpress-v3.json`;
+
+  let existingRelease = '';
+  try {
+    existingRelease = await octokit.repos.getReleaseByTag({
+      owner: githubOwner,
+      repo: githubRepo,
+      tag,
+    });
+
+    const assets = existingRelease.data.assets;
+    if (assets.length > 0) {
+      let downloadUrl = '';
+      for (const asset in assets) {
+        if (asset === distFileName) {
+          downloadUrl = asset.browser_download_url
+        }
+      }
+
+      if (downloadUrl === '') {
+        return false;
+      }
+
+      await downloadFile(downloadUrl, buildDir, localFileName);
+    } else {
+      console.log('Assets is empty! ' + tag);
+      return false;
+    }
+  } catch (e) {}
 
   const formDataZip = new FormData();
   formDataZip.append('bucket', R2_BUCKET_NAME);
@@ -33,6 +78,20 @@ const manualRelease = async (opts) => {
   })
   logger.info(`🔼 ${chalk.yellow(distFileName)} pushed to R2.`);
 
+  // Gather metadata for JSON
+  const themeMeta = {
+    ...await getThemeMeta(),
+    version: pkg.version,
+    requires: '6.1.1',
+    last_updated: DateTime.utc().toFormat('yyyy-LL-dd HH:mm:ss ZZZZ'),
+  };
+  themeMeta.download_url = themeMeta.download_url
+    .replace('{file}', `alps-wordpress-v${pkg.version}.zip`);
+
+  await fs.writeFile(`${buildDir}alps-wordpress-v3.json`, JSON.stringify(themeMeta, null, 2));
+  logger.info(`💚 ALPS Theme metadata saved to ${chalk.yellow(`alps-wordpress-v3.json`)}`);
+
+  // Upload JSON to R2
   const formDataJson = new FormData();
   formDataJson.append('bucket', R2_BUCKET_NAME);
   formDataJson.append('path', '/wordpress/themes/alps/' + metadataFileName);
@@ -49,28 +108,8 @@ const manualRelease = async (opts) => {
 
   logger.info('Updating latest release...')
 
-  const githubToken = env.GITHUB_TOKEN || null;
-  const githubRef = env.GITHUB_REF || null;
-  const [githubOwner, githubRepo] = env.GITHUB_REPOSITORY.split('/');
-
-  const octokit = new Octokit({
-    auth: githubToken,
-  });
-
-  // Extract git tag
-  const match = githubRef.match(/^refs\/tags\/(?<tag>v\d+\.\d+\.\d+\.\d+)$/);
-  if (!match) {
-    throw new Error(`Invalid tag name for release: "${githubRef.replace('refs/tags/', '')}"`);
-  }
-  const tag = match.groups.tag;
-
+  // Update github release from draft to PROD
   try {
-    const existingRelease = await octokit.repos.getReleaseByTag({
-      owner: githubOwner,
-      repo: githubRepo,
-      tag,
-    });
-
     await octokit.repos.updateRelease({
       owner: githubOwner,
       repo: githubRepo,
@@ -80,6 +119,20 @@ const manualRelease = async (opts) => {
   } catch (e) {}
 
   logger.info(`🍀 Release ${chalk.green(tag)} published on GitHub`);
+}
+
+async function downloadFile(url, folderPath, fileName) {
+  const filePath = folderPath + fileName;
+  const fileStream = fs.createWriteStream(filePath);
+
+  got.stream(url)
+    .pipe(fileStream)
+    .on('finish', () => {
+      console.log(`The file was successfully downloaded and saved in: ${filePath}`);
+    })
+    .on('error', (error) => {
+      console.error('Error downloading the file:', error);
+    });
 }
 
 module.exports = manualRelease;

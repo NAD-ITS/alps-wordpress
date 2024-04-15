@@ -11,6 +11,15 @@ jobs:
   publish:
     runs-on: ubuntu-22.04
     steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+
+      - id: prepare
+        name: Install Dependencies
+        run: |
+          npm install
+
       - id: publish
         name: Publish Theme
         run: |
