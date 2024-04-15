@@ -77,16 +77,21 @@ const manualRelease = async (opts) => {
   const filePath = buildDir + distFileName;
   const fileStream = fs.createWriteStream(filePath);
 
-  fileStream
-    .on('finish', () => {
-      console.log(`The file was successfully downloaded and saved in: ${filePath}`);
-    })
-    .on('error', (error) => {
-      console.error('Error downloading the file:', error);
-    });
-
   console.log("Downloading is started... " + downloadUrl);
-  await got.stream(downloadUrl).pipe(fileStream);
+
+  await new Promise((resolve, reject) => {
+    fileStream
+      .on('finish', resolve)
+      .on('error', (error) => {
+        console.error('Error downloading the file:', error);
+        reject(error);  // Отклоняем Promise при ошибке
+      });
+
+    // Начинаем скачивание
+    got.stream(downloadUrl).pipe(fileStream);
+  });
+
+  console.log(`The file was successfully downloaded and saved in: ${filePath}`);
 
   const formDataZip = new FormData();
   formDataZip.append('bucket', R2_BUCKET_NAME);
