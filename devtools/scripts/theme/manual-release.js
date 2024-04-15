@@ -39,6 +39,7 @@ const manualRelease = async (opts) => {
 
   fs.mkdirSync("build");
 
+  let downloadUrl = '';
   let existingRelease = '';
   try {
     existingRelease = await octokit.repos.getReleaseByTag({
@@ -49,7 +50,6 @@ const manualRelease = async (opts) => {
 
     const assets = existingRelease.data.assets;
     if (assets.length > 0) {
-      let downloadUrl = '';
       for (const asset of assets) {
         if (asset.name === distFileName) {
           downloadUrl = asset.browser_download_url;
@@ -66,27 +66,27 @@ const manualRelease = async (opts) => {
         console.log("FILE: " + JSON.stringify(file))
       }
 
-      console.log("FOLDER IS exists: " + fs.existsSync('build'));
-
-      const filePath = buildDir + distFileName;
-      const fileStream = fs.createWriteStream(filePath);
-
-      fileStream
-        .on('finish', () => {
-          console.log(`The file was successfully downloaded and saved in: ${filePath}`);
-        })
-        .on('error', (error) => {
-          console.error('Error downloading the file:', error);
-        });
-
-      console.log("Downloading is started... " + downloadUrl);
-      await got.stream(downloadUrl).pipe(fileStream);
-
     } else {
       console.log('Assets is empty! ' + tag);
       return false;
     }
   } catch (e) {}
+
+  console.log("FOLDER IS exists: " + fs.existsSync('build'));
+
+  const filePath = buildDir + distFileName;
+  const fileStream = fs.createWriteStream(filePath);
+
+  fileStream
+    .on('finish', () => {
+      console.log(`The file was successfully downloaded and saved in: ${filePath}`);
+    })
+    .on('error', (error) => {
+      console.error('Error downloading the file:', error);
+    });
+
+  console.log("Downloading is started... " + downloadUrl);
+  await got.stream(downloadUrl).pipe(fileStream);
 
   const formDataZip = new FormData();
   formDataZip.append('bucket', R2_BUCKET_NAME);
