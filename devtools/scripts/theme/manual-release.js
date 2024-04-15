@@ -39,7 +39,6 @@ const manualRelease = async (opts) => {
 
   fs.mkdirSync("build");
 
-  let downloadUrl = '';
   let existingRelease = '';
   try {
     existingRelease = await octokit.repos.getReleaseByTag({
@@ -50,6 +49,7 @@ const manualRelease = async (opts) => {
 
     const assets = existingRelease.data.assets;
     logger.info("Existing Release: " + JSON.stringify(existingRelease));
+    let downloadUrl = '';
     if (assets.length > 0) {
       for (const asset of assets) {
         if (asset.name === distFileName) {
@@ -62,36 +62,31 @@ const manualRelease = async (opts) => {
         return false;
       }
 
-      const files = fs.readdirSync('build');
-      for(const file of files) {
-        console.log("FILE: " + JSON.stringify(file))
-      }
+      console.log("FOLDER IS exists: " + fs.existsSync('build'));
+
+      const filePath = buildDir + distFileName;
+      const fileStream = fs.createWriteStream(filePath);
+
+      console.log("Downloading is started... " + downloadUrl);
+
+      await new Promise((resolve, reject) => {
+        fileStream
+          .on('finish', resolve)
+          .on('error', (error) => {
+            console.error('Error downloading the file:', error);
+            reject(error);
+          });
+
+        got.stream(downloadUrl).pipe(fileStream);
+      });
+
+      console.log(`The file was successfully downloaded and saved in: ${filePath}`);
 
     } else {
       console.log('Assets is empty! ' + tag);
       return false;
     }
   } catch (e) {}
-
-  console.log("FOLDER IS exists: " + fs.existsSync('build'));
-
-  const filePath = buildDir + distFileName;
-  const fileStream = fs.createWriteStream(filePath);
-
-  console.log("Downloading is started... " + downloadUrl);
-
-  await new Promise((resolve, reject) => {
-    fileStream
-      .on('finish', resolve)
-      .on('error', (error) => {
-        console.error('Error downloading the file:', error);
-        reject(error);
-      });
-
-    got.stream(downloadUrl).pipe(fileStream);
-  });
-
-  console.log(`The file was successfully downloaded and saved in: ${filePath}`);
 
   const formDataZip = new FormData();
   formDataZip.append('bucket', R2_BUCKET_NAME);
