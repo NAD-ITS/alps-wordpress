@@ -51,7 +51,6 @@ const manualRelease = async (opts) => {
     if (assets.length > 0) {
       let downloadUrl = '';
       for (const asset of assets) {
-        logger.info("Asset name: " + asset.name + " :: " + asset.browser_download_url + " :: " + asset.name === distFileName);
         if (asset.name === distFileName) {
           downloadUrl = asset.browser_download_url;
         }
@@ -70,15 +69,16 @@ const manualRelease = async (opts) => {
       const filePath = buildDir + distFileName;
       const fileStream = fs.createWriteStream(filePath);
 
-      console.log("Downloading is started... " + downloadUrl);
-      await got.stream(downloadUrl)
-        .pipe(fileStream)
+      fileStream
         .on('finish', () => {
           console.log(`The file was successfully downloaded and saved in: ${filePath}`);
         })
         .on('error', (error) => {
           console.error('Error downloading the file:', error);
         });
+
+      console.log("Downloading is started... " + downloadUrl);
+      await got.stream(downloadUrl).pipe(fileStream);
 
     } else {
       console.log('Assets is empty! ' + tag);
