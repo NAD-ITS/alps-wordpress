@@ -48,7 +48,7 @@ const manualRelease = async (opts) => {
     });
 
     const assets = existingRelease.data.assets;
-    logger.info("Existing Release: " + JSON.stringify(existingRelease));
+    logger.info("Existing Release: " + JSON.stringify(existingRelease) + " :: Assets: " + JSON.stringify(assets));
     let downloadUrl = '';
     if (assets.length > 0) {
       for (const asset of assets) {
