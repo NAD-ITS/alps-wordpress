@@ -62,7 +62,7 @@ const manualRelease = async (opts) => {
       const filePath = buildDir + distFileName;
       const fileStream = fs.createWriteStream(filePath);
 
-      console.log("Downloading is started...")
+      console.log("Downloading is started... " + downloadUrl);
       await got.stream(downloadUrl)
         .pipe(fileStream)
         .on('finish', () => {
