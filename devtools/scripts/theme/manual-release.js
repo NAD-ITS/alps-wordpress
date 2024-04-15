@@ -127,6 +127,7 @@ async function downloadFile(url, folderPath, fileName) {
   const filePath = folderPath + fileName;
   const fileStream = fs.createWriteStream(filePath);
 
+  console.log("Downloading is started...")
   got.stream(url)
     .pipe(fileStream)
     .on('finish', () => {
@@ -135,6 +136,7 @@ async function downloadFile(url, folderPath, fileName) {
     .on('error', (error) => {
       console.error('Error downloading the file:', error);
     });
+  console.log("Downloading is finished...")
 }
 
 module.exports = manualRelease;
