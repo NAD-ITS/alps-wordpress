@@ -1,7 +1,0 @@
-{
-  "type": "warning",
-  "appearance": "small-notification",
-  "text": "Warning message content. Heed this warning or else.",
-  "first_button": false,
-  "second_button": false
-}
