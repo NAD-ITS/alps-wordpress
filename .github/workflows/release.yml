@@ -1,4 +1,4 @@
-name: Publish PROD ALPS Theme
+name: Publish PROD ALPS NAD Theme
 
 on:
   workflow_dispatch:

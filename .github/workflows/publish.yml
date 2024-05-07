@@ -1,4 +1,4 @@
-name: Build & Publish Draft ALPS Theme
+name: Build & Publish Draft ALPS NAD Theme
 
 on:
   push:
