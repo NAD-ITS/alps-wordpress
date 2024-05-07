@@ -1,0 +1,306 @@
+{
+  "3.13.4" : {
+    "description" : "Page builder support. Color theme palette integration. Header options available for both posts and pages."
+  },
+  "3.12.0" : {
+    "description" : "Support php 8.1. Migrate theme to Sage version 10. Migrate Carbon fields to the new version. Remove Kernel Scripts. Migrate from webpack to bud."
+  },
+  "3.11.0" : {
+    "description" : "Support php 8. Update global variables and support blade files for php 8.0 version."
+  },
+  "3.10.6" : {
+    "description" : "Update css styles build."
+  },
+  "3.10.5" : {
+    "description" : "Fix styles for Woocommerce plugin"
+  },
+  "3.10.4" : {
+    "description" : "Fix Localized Google internal fonts. Update link tag correct type in head."
+  },
+  "3.10.3" : {
+    "description" : "Synchronize releases."
+  },
+  "3.10.1" : {
+    "description" : "Fix: Localize Google Fonts within Template. Fix issue for GDPR of google fonts API."
+  },
+  "3.10.0" : {
+    "description" : "Added support for Korean internationalization `.po` files, KO, thanks to Sangyong Lee."
+  },
+  "3.9.2" : {
+    "description" : "Added a link to the image on the related stories block."
+  },
+  "3.9.1" : {
+    "description" : "Updated the Search drawer markup to allow for filter results."
+  },
+  "3.9.0" : {
+    "description" : "  Add: Switched 'Related Posts' to widgets."
+  },
+  "3.8.0" : {
+    "description" : "Added the ablity to diable the WPML language menu, and fixed a bug with CarbonFields and ALPS Settings page."
+  },
+  "3.7.9" : {
+    "description" : "HOTFIX: Update ALPS versions if value is empty (fix for Redis)"
+  },
+  "3.7.8" : {
+    "description" : "HOTFIX: Adding annother fix for CSS `auto` properties for height and width of images."
+  },
+  "3.7.7" : {
+    "description" : "HOTFIX: Adding CSS `auto` properties for height and width of images."
+  },
+  "3.7.6" : {
+    "description" : "Fix: ALPS Related Pages block was only at 3 columns when the sidebar was hidden. A bug with related stories now showing for certain categories that had different slugs."
+  },
+  "3.7.5" : {
+    "description" : "Fix: Switch related posts sidebar, menu drawer, and widget from using h3's to using divs."
+  },
+  "3.7.4" : {
+    "description" : "Fix: Pulling in the images along with the JS and CSS to the local cache."
+  },
+  "3.7.3" : {
+    "description" : "Fix: Fixing a bug that didn't allow the local cached version of the ALPS CSS/JS to be used on subthemes."
+  },
+  "3.7.2" : {
+    "description" : "HOTFIX: Bug with homepage 3-up grid displays shifting to the right to overlap the Sabbath column."
+  },
+  "3.7.1" : {
+    "description" : "Fixed a bug that didn't pull the latest version of the code."
+  },
+  "3.7.0" : {
+    "description" : "Added local caching of ALPS CDN CSS and Javascript files for performance. Fixed a bug where the related post grid at 3up widths (with hidden sidebar) is shifted wrong on the page."
+  },
+  "3.6.6" : {
+    "description" : "Removing the second copy of jQuery, (2.2.4). This REQUIRES Wordpress 5.6 or higher."
+  },
+  "3.6.5" : {
+    "description" : "Fixed the styling for footnotes, and Footnotes Made Easy. Removed support for Guidepost and replaced it with SimpleTOC."
+  },
+  "3.6.4" : {
+    "description" : "Fixed and updated the German translation."
+  },
+  "3.6.3" : {
+    "description" : "Fixed issue with the html language attributes displaying extra quote marks around them."
+  },
+  "3.6.2" : {
+    "description" : "Adding support for the new ALPS Media Block and fixing issues from the l-grid-item--xxl errors."
+  },
+  "3.6.1" : {
+    "description" : "Fixed an issue with ALPS using the `l-grid-item--xl` classes as `l-grid-item--xxl`"
+  },
+  "3.6.0" : {
+    "description" : "Added support for wide logos and the feature header caption on posts."
+  },
+  "3.5.15" : {
+    "description" : "Add RU localization, fixed the `dynamic sidebar`, add the full width  template, fixed the ES translation."
+  },
+  "3.5.14" : {
+    "description" : "Missing pagination on search results."
+  },
+  "3.5.13" : {
+    "description" : "Missing pagination on search results."
+  },
+  "3.5.12" : {
+    "description" : "Added additional strings to the `.pot` file, bringing in some more files in the `/app` file."
+  },
+  "3.5.11" : {
+    "description" : "Added a full-width page template."
+  },
+  "3.5.10" : {
+    "description" : "Overwride of Wordpress's `.has-drop-cap:not(:focus)::first-letter` style."
+  },
+  "3.5.9" : {
+    "description" : "Removed `has-dropcap` classes from the single page."
+  },
+  "3.5.8" : {
+    "description" : "Added Russian `.po` files."
+  },
+  "3.5.7" : {
+    "description" : "Theme i18n refactoring."
+  },
+  "3.5.6" : {
+    "description" : "Misc cleanup and fixes. Dropcaps, JS, and Nav drawer."
+  },
+  "3.5.5" : {
+    "description" : "Fixed the double-spacing betwen paragraphs on articles and buttons that weren't outlined."
+  },
+  "3.5.4" : {
+    "description" : "Fixed to properly format the localized post date."
+  },
+  "3.5.3" : {
+    "description" : "Adding support for `gt3pg-pro/grid` block."
+  },
+  "3.5.2" : {
+    "description" : "Adding support for more kadance, gt3-photo-video-gallery, uagb, and kioken blocks."
+  },
+  "3.5.1" : {
+    "description" : "Removing Qubely block support and adding support for two Kadence blocks."
+  },
+  "3.5.0" : {
+    "description" : "ALPS version selector to allow an admin to set the version of ALPS used, including a `latest` option."
+  },
+  "3.4.12" : {
+    "description" : "Fixed: External comment systems not working."
+  },
+  "3.4.11" : {
+    "description" : "Fixed: Custom Logo set with WPML not Showing in 3.4.0 and forward"
+  },
+  "3.4.10" : {
+    "description" : "Switched the jquery CDN to Cloudflare's version."
+  },
+  "3.4.9" : {
+    "description" : "Added support for select `gutentor` and `qubely` blocks."
+  },
+  "3.4.8" : {
+    "description" : "Added cache busting for WP css/js."
+  },
+  "3.4.7" : {
+    "description" : "Added checkbox to disable related images, fixed & in categories, post feed label and sabbath column hiding."
+  },
+  "3.4.6" : {
+    "description" : "Added support for a custom field called `schemamarkup`, fixed an issue with `aligncenter` not centering images, CTA buttons on Related pages to include the outlines."
+  },
+  "3.4.5" : {
+    "description" : "Added: Core Table and Core Columns blocks for Gutenberg."
+  },
+  "3.4.4" : {
+    "description" : "Fixed: Schema error and custom meta fields not showing."
+  },
+  "3.4.3" : {
+    "description" : "Fixed: Comments not showing."
+  },
+  "3.4.2" : {
+    "description" : "Fixed: CTA button missing from Full screen hero."
+  },
+  "3.4.1" : {
+    "description" : "Fixed: The theme was missing the `hide-sabbath` class on all instances of the Sabbath column being hidden."
+  },
+  "3.4.0" : {
+    "description" : "Adds custom options for homepage and posts listing pages."
+  },
+  "3.3.0" : {
+    "description" : "Adds the Media Testimonies block and sidebar menu link underlining."
+  },
+  "3.2.2" : {
+    "description" : "Fixed links when the related pages were set to child pages and resolving to the page id and not the freindly url."
+  },
+  "3.2.1" : {
+    "description" : "Fixed an error that broke the gallery."
+  },
+  "3.2.0" : {
+    "description" : "Adding a new full screen option, fixes to the buttons in WP 5.4 and WPML Logos."
+  },
+  "3.1.3" : {
+    "description" : "Added the seperator block and fixed the new theme version notificaitons."
+  },
+  "3.1.2" : {
+    "description" : "Fix: 4-digit Numbers appears on page when adding a 'Footer Logo Icon'"
+  },
+  "3.1.1" : {
+    "description" : "Fix for comment form not rendering correctly"
+  },
+  "3.1.0" : {
+    "description" : "Added a Hero Carousel slideshow with a maximum number of 6 images."
+  },
+  "3.0.34" : {
+    "description" : "Fixed Guidepost css with the change of the Guidepost plugin."
+  },
+  "3.0.33" : {
+    "description" : "Fixes for footer messages, Guidepost, and the h1 in headers."
+  },
+  "3.0.31" : {
+    "description" : "Fixed the navigation bar covering ALPS elements for logged in users."
+  },
+  "3.0.30" : {
+    "description" : "Removed custom jQuery version. Now it depends on the Wordpress version."
+  },
+  "3.0.29" : {
+    "description" : "Fix to the header menu."
+  },
+  "3.0.28" : {
+    "description" : "Removed requirement for the Gutenberg plugin, shortcodes from expanding in teasers. Added support for the ARVE/NextGenThemes embed block and a License.txt file."
+  },
+  "3.0.27-beta" : {
+    "description" : "Remove requirements for Classic Editor, fixing the version compare, misc fixes."
+  },
+  "3.0.26-beta" : {
+    "description" : "Fixed Theme cache files not working in some hosting."
+  },
+  "3.0.25-beta" : {
+    "description" : "Fixed a bug with the sidebar hiding and 3-up grids."
+  },
+  "3.0.24-beta" : {
+    "description" : "Restoring deleted piklist files."
+  },
+  "3.0.23-beta" : {
+    "description" : "A collection of urgent bugs."
+  },
+  "3.0.22-beta" : {
+    "description" : "Adding support for Tertiary menus."
+  },
+  "3.0.21-beta" : {
+    "description" : "Removing of Piklist and adding support for title, class, etc attributes in the menu system."
+  },
+  "3.0.19-beta" : {
+    "description" : "Version increment to fix deployment."
+  },
+  "3.0.18-beta" : {
+    "description" : "Adds the shortcode block and a new CTA block."
+  },
+  "3.0.17-beta" : {
+    "description" : "Fixes the footer logo missing when the Sabbath column is hidden."
+  },
+  "3.0.16-beta" : {
+    "description" : "Fixes the breakout block on the wrong grid alignment."
+  },
+  "3.0.15-beta" : {
+    "description" : "Adds a Latest Posts block."
+  },
+  "3.0.14-beta" : {
+    "description" : "Adding dropdown support in the secondary menus, removing hardcoded WPML menu, and fixing the version number."
+  },
+  "3.0.13-beta" : {
+    "description" : "Fixes an issue with the paragraphs block not displaying functioning correctly. This removes the custom block and goes back to the default core paragraphs block."
+  },
+  "3.0.12-beta" : {
+    "description" : "Fixed an issue with i18n phrases not using the correct function.",
+    "upgrade_notice" : "This fixes an issue with the frontend getting a fatal error."
+  },
+  "3.0.11-beta" : {
+    "description" : "Fixed an issue with i18n phrases not using the correct function.",
+    "upgrade_notice" : "This fixes an issue with the frontend getting a fatal error."
+  },
+  "3.0.10-beta" : {
+    "description" : "Fixing the version number",
+    "upgrade_notice" : "This is the second beta release. Significant changes have been made between the alpha and beta versions."
+  },
+  "3.0.9-beta" : {
+    "description" : "Significant changes and bug fixes to prepare for the final release. Check the CHANGELOG.md for details.",
+    "upgrade_notice" : "This is the first beta release. Significant changes have been made."
+  },
+  "3.0.8-alpha" : {
+    "description" : "Version number increment"
+  },
+  "3.0.7-alpha" : {
+    "description" : "Removing the old wp-updates-theme.php and adding the Kernl theme update code."
+  },
+  "3.0.6-alpha" : {
+    "description" : "Fixing the version number."
+  },
+  "3.0.5-alpha" : {
+    "description" : "Updating the version number to ensure Kernl is working."
+  },
+  "3.0.4-alpha" : {
+    "description" : "Fixing errors in this file."
+  },
+  "3.0.3-alpha" : {
+    "description" : "Testing the changelog update."
+  },
+  "3.0.2-alpha" : {
+    "description" : "Testing the Kernl deployment"
+  },
+  "3.0.1-alpha" : {
+    "description" : "Adding the Kernl file."
+  },
+  "3.0.0-alpha" : {
+    "description" : "Initial commit and testing."
+  }
+}

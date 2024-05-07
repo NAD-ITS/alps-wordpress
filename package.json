@@ -1,0 +1,51 @@
+{
+  "name": "alps-wordpress-v3",
+  "version": "3.15.2.3",
+  "private": true,
+  "browserslist": [
+    "extends @wordpress/browserslist-config"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "dev": "bud dev",
+    "build": "bud build",
+    "pot": "mkdir -p ./resources/lang && find ./resources ./app -iname '*.php' | xargs xgettext --add-comments=TRANSLATORS --force-po --from-code=UTF-8 --default-domain=de_DE -k__ -k_e -k_n:1,2 -k_x:1,2c -k_ex:1,2c -k_nx:4c,12 -kesc_attr__ -kesc_attr_e -kesc_attr_x:1,2c -kesc_html__ -kesc_html_e -kesc_html_x:1,2c -k_n_noop:1,2 -k_nx_noop:3c,1,2, -k__ngettext_noop:1,2 -o resources/lang/alps.pot && find ./resources -iname '*.blade.php' | xargs xgettext --language=Python --add-comments=TRANSLATORS --force-po --from-code=UTF-8 --default-domain=de_DE -k__ -k_e -k_n:1,2 -k_x:1,2c -k_ex:1,2c -k_nx:4c,12 -kesc_attr__ -kesc_attr_e -kesc_attr_x:1,2c -kesc_html__ -kesc_html_e -kesc_html_x:1,2c -k_n_noop:1,2 -k_nx_noop:3c,1,2, -k__ngettext_noop:1,2 -j -o resources/lang/alps.pot",
+    "translate": "yarn translate:pot && yarn translate:update",
+    "translate:pot": "wp i18n make-pot . ./resources/lang/sage.pot --include=\"app,resources\"",
+    "translate:update": "for filename in ./resources/lang/*.po; do msgmerge -U $filename ./resources/lang/sage.pot; done; rm -f ./resources/lang/*.po~",
+    "translate:compile": "yarn translate:mo && yarn translate:js",
+    "translate:js": "wp i18n make-json ./resources/lang --pretty-print",
+    "translate:mo": "wp i18n make-mo ./resources/lang ./resources/lang",
+    "wp:theme:build": "node devtools/runner.js theme:build",
+    "wp:theme:draft-release": "node devtools/runner.js theme:draft-release",
+    "wp:theme:manual-release": "node devtools/runner.js theme:manual-release",
+    "project:set-version": "node devtools/runner.js project:set-version",
+    "assets-compile": "node devtools/scripts/styles/compile.js"
+  },
+  "devDependencies": {
+    "@octokit/rest": "^19.0.7",
+    "@roots/bud": "6.15.0",
+    "@roots/bud-tailwindcss": "6.15.0",
+    "@roots/sage": "6.15.0",
+    "archiver": "^5.3.1",
+    "chalk": "^4.1.0",
+    "date-fns": "^2.29.3",
+    "form-data": "^4.0.0",
+    "fs-extra": "^11.1.0",
+    "got": "11.8.6",
+    "luxon": "^3.2.1",
+    "node-sass": "^9.0.0",
+    "ssh2-sftp-client": "^9.0.4",
+    "webpack": "^5.76.0",
+    "winston": "^3.8.2",
+    "yaml": "^2.2.1"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@wordpress/browserslist-config": "^5.21.0",
+    "aws-sdk": "^2.1397.0",
+    "dotenv": "^16.0.3"
+  }
+}
