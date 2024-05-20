@@ -111,7 +111,7 @@ const manualRelease = async (opts) => {
 
   const formDataZip = new FormData();
   formDataZip.append('bucket', R2_BUCKET_NAME);
-  formDataZip.append('path', `/wordpress/themes/alps/alps-wordpress-v${pkg.version}.zip`);
+  formDataZip.append('path', `/wordpress/themes/alps-nad/alps-wordpress-v${pkg.version}.zip`);
   formDataZip.append('data', fs.createReadStream(`${buildDir}${distFileName}`));
 
   await got('https://alps-r2.adventist.workers.dev/upload', {
@@ -139,7 +139,7 @@ const manualRelease = async (opts) => {
   // Upload JSON to R2
   const formDataJson = new FormData();
   formDataJson.append('bucket', R2_BUCKET_NAME);
-  formDataJson.append('path', '/wordpress/themes/alps/' + metadataFileName);
+  formDataJson.append('path', '/wordpress/themes/alps-nad/' + metadataFileName);
   formDataJson.append('data', fs.createReadStream(`${buildDir}${metadataFileName}`));
 
   await got('https://alps-r2.adventist.workers.dev/upload', {
