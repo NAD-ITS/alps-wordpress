@@ -3,10 +3,10 @@
  * Global default settings for this installation
  */
 
-// Logo (logo file is located /resources/views/patterns/00-atoms/logos/alps-logo-custom.blade.php)
+// Logo (To use a different logo, place the SVG contents of the custom logo into a file at /views/patterns/00-atoms/logos/alps-logo-custom.blade.php)
 
 // Theme Color (nad-denim/nad-nile/nad-amethyst/nad-spark/nad-miracle/nad-branch/nad-vine/treefrog/ming/bluejay/iris/lily/scarlett/campfire/winter/forest/cave/denim/emperor/grapevine/velvet/earth/night)
-update_option( '_theme_color', 'campfire' );
+update_option( '_theme_color', 'nad-denim' );
 
 // Dark Theme (true/false)
 update_option( '_dark_theme', 'false' );
@@ -18,10 +18,10 @@ update_option( '_grid_lines', '' );
 update_option( '_square_buttons', '' );
 
 // Site Branding Statement (Text)
-update_option( '_site_branding_statement', 'An official website of the Seventh-day Adventist Church.' );
+update_option( '_site_branding_statement', '[Site Name] is a website of the Seventh-day Adventist church in North America.' );
 
 // Global Branding Statement (Text)
-update_option( '_global_branding_statement', 'Seventh-day Adventists are devoted to helping people understand the Bible to find freedom, healing, and hope in Jesus.' );
+update_option( '_global_branding_statement', 'The Seventh-day Adventist church in North America exists to share the distinctive, Christ-centered, Seventh-day Adventist message of hope and wholeness in North America and the world.' );
 
 // ALPS Core files version (alps-remote/alps-local)
 update_option( '_project_alps_version', 'alps-remote' );
@@ -66,7 +66,7 @@ update_option( '_posts_image_round', '' );
  */
 
 // Hide Sabbath Icon Until Scroll (true/false)
-update_option( '_sabbath_scroll', 'false' );
+update_option( '_sabbath_scroll', 'true' );
 
 // Hide the sabbath column (true/false)
 update_option( '_sabbath_hide', 'false' );
@@ -76,10 +76,10 @@ update_option( '_sabbath_hide', 'false' );
  */
 
 // Footer Description (Text)
-update_option( '_footer_description_en', 'An official website of the Seventh-day Adventist Church.' );
+update_option( '_footer_description', '[Site URL/Name] is a website of the North American Division of the Seventh-day Adventist church.' );
 
 // Footer Copyright (Text)
-update_option( '_footer_copyright', 'General Conference of Seventh-day Adventists' );
+update_option( '_footer_copyright', 'North American Division of the Seventh-day Adventist church' );
 
 // Fallback Footer Logo Icon (square/circle)
 update_option( '_footer_logo_type', 'circle' );
@@ -154,19 +154,13 @@ function auto_nav_creation_footer() {
 
     // Set up default menu items
     wp_update_nav_menu_item($menu->term_id, 0, array(
-      'menu-item-title' =>  __('Trademark and Logo Usage', 'alps'),
-      'menu-item-classes' => '',
-      'menu-item-url' => 'https://www.adventist.org/en/copyright/trademark-and-logo-usage/',
-      'menu-item-status' => 'publish'
-    ));
-    wp_update_nav_menu_item($menu->term_id, 0, array(
       'menu-item-title' =>  __('Legal Notice', 'alps'),
-      'menu-item-url' => 'https://www.adventist.org/en/copyright/legal-notice/',
+      'menu-item-url' => 'https://www.nadadventist.org/acc_notice',
       'menu-item-status' => 'publish'
     ));
     wp_update_nav_menu_item($menu->term_id, 0, array(
       'menu-item-title' =>  __('Privacy Policy', 'alps'),
-      'menu-item-url' => 'http://privacy.adventist.org/en/',
+      'menu-item-url' => 'https://www.nadadventist.org/privacy',
       'menu-item-status' => 'publish'
     ));
 
@@ -179,6 +173,54 @@ function auto_nav_creation_footer() {
   update_option( 'menu_check', true );
 }
 add_action('load-nav-menus.php', 'auto_nav_creation_footer');
+
+// Footer Secondary Navigation
+function auto_nav_creation_social_footer() {
+  $name = 'Footer Social Media Navigation';
+  $menu_exists = wp_get_nav_menu_object($name);
+
+  // If it doesn't exist, let's create it.
+  if (!$menu_exists) {
+    $menu_id = wp_create_nav_menu($name);
+    $menu = get_term_by('name', $name, 'nav_menu');
+
+    // Set up default menu items
+    wp_update_nav_menu_item($menu->term_id, 0, array(
+      'menu-item-title' =>  __('Facebook', 'alps'),
+      'menu-item-classes' => '',
+      'menu-item-url' => 'https://www.facebook.com/NADAdventist',
+      'menu-item-status' => 'publish'
+    ));
+    wp_update_nav_menu_item($menu->term_id, 0, array(
+      'menu-item-title' =>  __('Twitter', 'alps'),
+      'menu-item-url' => 'https://twitter.com/NADAdventist',
+      'menu-item-status' => 'publish'
+    ));
+    wp_update_nav_menu_item($menu->term_id, 0, array(
+      'menu-item-title' =>  __('Vimeo', 'alps'),
+      'menu-item-url' => 'https://vimeo.com/nadadventist',
+      'menu-item-status' => 'publish'
+    ));
+    wp_update_nav_menu_item($menu->term_id, 0, array(
+      'menu-item-title' =>  __('YouTube', 'alps'),
+      'menu-item-url' => 'https://www.youtube.com/user/nadadventist',
+      'menu-item-status' => 'publish'
+    ));
+    wp_update_nav_menu_item($menu->term_id, 0, array(
+      'menu-item-title' =>  __('Flickr', 'alps'),
+      'menu-item-url' => 'https://www.flickr.com/photos/nadadventist/',
+      'menu-item-status' => 'publish'
+    ));
+
+    // Set menu location
+    $locations = get_theme_mod('nav_menu_locations');
+    $locations['footer_primary_navigation'] = $menu->term_id;
+    set_theme_mod('nav_menu_locations', $locations);
+  }
+
+  update_option( 'menu_check', true );
+}
+add_action('load-nav-menus.php', 'auto_nav_creation_social_footer');
 
 // Drawer Navigation
 function auto_nav_creation_learn_more() {
@@ -198,18 +240,13 @@ function auto_nav_creation_learn_more() {
       'menu-item-status' => 'publish'
     ));
     wp_update_nav_menu_item($menu->term_id, 0, array(
-      'menu-item-title' =>  __('ADRA', 'alps'),
-      'menu-item-url' => 'https://adra.org/',
+      'menu-item-title' =>  __('North American Division of Seventh-day Adventists', 'alps'),
+      'menu-item-url' => 'https://www.nadadventist.org/',
       'menu-item-status' => 'publish'
     ));
     wp_update_nav_menu_item($menu->term_id, 0, array(
-      'menu-item-title' =>  __('Adventist World Radio', 'alps'),
-      'menu-item-url' => 'https://www.awr.org/',
-      'menu-item-status' => 'publish'
-    ));
-    wp_update_nav_menu_item($menu->term_id, 0, array(
-      'menu-item-title' =>  __('Hope Channel', 'alps'),
-      'menu-item-url' => 'https://www.hopetv.org/',
+      'menu-item-title' =>  __('AdventistGiving', 'alps'),
+      'menu-item-url' => 'https://adventistgiving.org/',
       'menu-item-status' => 'publish'
     ));
 
@@ -222,10 +259,3 @@ function auto_nav_creation_learn_more() {
   update_option( 'menu_check', true );
 }
 add_action('load-nav-menus.php', 'auto_nav_creation_learn_more');
-
-/*
- * Translate Content
- */
-
-// Translate Description (Text)
-update_option( '_translate_description', 'An official website of the Seventh-day Adventist Church.' );
