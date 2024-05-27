@@ -3,14 +3,16 @@ const yaml = require('yaml');
 const logger = require('./lib/logger.js');
 const themeBuild = require('./scripts/theme/build.js');
 const setVersion = require('./scripts/project/set-version');
-const themeRelease = require('./scripts/theme/release');
+const themeRelease = require('./scripts/theme/draft-release');
+const manualRelease = require("./scripts/theme/manual-release");
 
 const fs = fsLib.promises;
 
 const scripts = {
     'project:set-version': setVersion,
     'theme:build': themeBuild,
-    'theme:release': themeRelease,
+    'theme:draft-release': themeRelease,
+    'theme:manual-release': manualRelease,
     // 'i18n:create-json': require('./scripts/i18n/create-json'),
 };
 

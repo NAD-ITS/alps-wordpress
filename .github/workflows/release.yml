@@ -1,9 +1,11 @@
-name: Build & Publish Draft ALPS Theme
+name: Publish PROD ALPS Theme
 
 on:
-  push:
-    tags:
-      - v*
+  workflow_dispatch:
+    inputs:
+      releaseId:
+        description: 'Release ID to publish'
+        required: true
 
 jobs:
   publish:
@@ -18,20 +20,11 @@ jobs:
         run: |
           npm install
 
-      - id: build-components
-        name: Build Components
-        run: |
-          npm run build
-
-      - id: build-theme
-        name: Build Theme
-        run: |
-          npm run wp:theme:build
-
       - id: publish
-        name: Publish Draft Theme
+        name: Publish Theme
         run: |
-          npm run wp:theme:draft-release
+          npm run wp:theme:manual-release
         env:
+          RELEASE_ID: ${{ github.event.inputs.releaseId }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CLOUDFLARE_R2_ACCESS_TOKEN: ${{ secrets.CLOUDFLARE_R2_ACCESS_TOKEN }}

@@ -1,12 +1,9 @@
 const fs = require('fs-extra');
 const archiver = require('archiver');
 const chalk = require('chalk');
-const { DateTime } = require('luxon');
 const exec = require('../../lib/exec');
 const dirTree = require('../../lib/dir-tree');
 const getPackageInfo = require('../../lib/get-package-info');
-const getThemeMeta = require('../../lib/get-theme-meta');
-// const {THEME_PACKAGE_NAME} = require("../../dev-tools-constants");
 
 const themeBuild = async (opts) => {
   const { logger, args } = opts;
@@ -61,20 +58,21 @@ const themeBuild = async (opts) => {
     logger.info(`💚 ALPS Theme packaged to ${chalk.yellow(`${pkg.name}.zip`)}`);
   }
 
-  // Gather metadata
-  if (!args.dev) {
-      const themeMeta = {
-          ...await getThemeMeta(),
-          version: pkg.version,
-          requires: '6.1.1',
-          last_updated: DateTime.utc().toFormat('yyyy-LL-dd HH:mm:ss ZZZZ'),
-      };
-      themeMeta.download_url = themeMeta.download_url
-          .replace('{file}', `alps-wordpress-v${pkg.version}.zip`);
 
-      await fs.writeFile(`${buildDir}alps-wordpress-v3.json`, JSON.stringify(themeMeta, null, 2));
-      logger.info(`💚 ALPS Theme metadata saved to ${chalk.yellow(`alps-wordpress-v3.json`)}`);
-  }
+  // // Gather metadata. UNCOMMENT JUST FOR DEV
+  // if (!args.dev) {
+  //     const themeMeta = {
+  //         ...await getThemeMeta(),
+  //         version: pkg.version,
+  //         requires: '6.1.1',
+  //         last_updated: DateTime.utc().toFormat('yyyy-LL-dd HH:mm:ss ZZZZ'),
+  //     };
+  //     themeMeta.download_url = themeMeta.download_url
+  //         .replace('{file}', `alps-wordpress-v${pkg.version}.zip`);
+  //
+  //     await fs.writeFile(`${buildDir}alps-wordpress-v3.json`, JSON.stringify(themeMeta, null, 2));
+  //     logger.info(`💚 ALPS Theme metadata saved to ${chalk.yellow(`alps-wordpress-v3.json`)}`);
+  // }
 }
 
 const createArchive = (src, name, logger) => {
