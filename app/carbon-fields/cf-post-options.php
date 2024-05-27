@@ -24,6 +24,22 @@ function setDefaultHeader() {
     return $default;
 }
 
+function setDefaultRelatedImageCrop() {
+    $default = 'square';
+    if (!empty($_GET['post'])){
+        $id = $_GET['post'];
+        $grid = get_post_meta($id,'_related_grid',true);
+        $oldCircle = get_post_meta($id,'_related_image_round',true);
+        if (!empty($oldCircle)){
+            $default = 'circle';
+        }
+        if (!empty($grid)){
+            $default = 'landscape';
+        }
+    }
+    return $default;
+}
+
 add_action('carbon_fields_register_fields', 'crb_page_options');
 function crb_page_options()
 {
@@ -76,11 +92,13 @@ function crb_attach_header()
 				::make('separator', 'crb_long_header', __('Banner', 'alps'))
 				->set_help_text(__('IMPORTANT: Setting an image and title below will override the post title and feature image .', 'alps')),
 			Field
-				::make('text', 'display_title', __('Header Title', 'alps')),
-			Field
 				::make('text', 'kicker', __('Header Kicker', 'alps')),
 			Field
+				::make('text', 'display_title', __('Header Title', 'alps')),
+			Field
 				::make('text', 'long_header_subtitle', __('Header Subtitle', 'alps')),
+            Field
+                ::make('text', 'page_sub_title', __('Page Subtitle', 'alps')),
 			Field
 				::make('image', 'header_background_image', __('Custom Header Image (will override feature image)', 'alps'))
 				->set_width(50),
@@ -361,22 +379,24 @@ function crb_attach_related_pages()
 			Field
 				::make('checkbox', 'related_image', __('Related Pages Image', 'alps'))
 				->set_option_value('true')
-				->set_help_text(__('Select to display the feature image for the related pages.', 'alps')),
-			Field
-				::make('checkbox', 'related_image_round', __('Related Pages Round Image', 'alps'))
-				->set_option_value('true')
-				->set_help_text(__('Select to make the featured image round.', 'alps'))
-				->set_conditional_logic([
-					'relation' => 'AND',
-					[
-						'field' => 'related_image',
-						'value' => true,
-					],
-					[
-						'field' => 'related_grid',
-						'value' => false,
-					]
-				]),
+				->set_help_text(__('Select to display the feature image for the related pages.', 'alps'))
+                ->set_width(50),
+            Field
+                ::make('radio', 'related_image_crop', __('Related Page Image Cropping', 'alps'))
+                ->add_options([
+                    'square' => __('Square', 'alps'),
+                    'landscape' => __('Landscape', 'alps'),
+                    'portrait' => __('Portrait', 'alps'),
+                    'circle' => __('Circle', 'alps'),
+                ])
+                ->set_default_value(setDefaultRelatedImageCrop())
+                ->set_conditional_logic([
+                    [
+                        'field' => 'related_image',
+                        'value' => true,
+                    ]
+                ])
+            ->set_width(50),
 		]);
 }
 

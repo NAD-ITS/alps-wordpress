@@ -1,5 +1,0 @@
-name: 'WP Theme::Deploy'
-description: 'Build and Deploy ALPS WordPress theme'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'

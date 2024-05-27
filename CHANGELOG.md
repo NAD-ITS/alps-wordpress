@@ -3,10 +3,42 @@ A record of the changes made to `ALPS for Wordpress`.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.15.2.3]
+### Update
+- Update PROD workflow: add latest parameter.
+
+## [3.15.2.2]
+### Update
+- Update DRAFT workflow.
+
+## [3.15.2.1]
+### Update
+- Update workflow.
+
+## [3.15.2.0]
+### Update
+- Update: split draft and PROD workflows.[#756](https://github.com/adventistchurch/alps-wordpress/pull/756)
+
+## [3.15.1.9]
+### Update
+- Update publish workflow.[#751](https://github.com/adventistchurch/alps-wordpress/pull/751)
+
+## [3.15.1.8]
+### Update
+- Added Primary Navigation Menu supporting 3rd level.[#745](https://github.com/adventistchurch/alps-wordpress/pull/745);
+
+## [3.15.1.7]
+### Update
+- Added lodash.js dependency to carbon fields initialization (WP 6.4+)[#737](https://github.com/adventistchurch/alps-wordpress/pull/737);
+- Add page subtitle [#723](https://github.com/adventistchurch/alps-wordpress/issues/723);
+
 ## [3.15.1.5]
 ### Update
 - Make general link for getting latest version of theme [#723](https://github.com/adventistchurch/alps-wordpress/issues/723);
-- Add labels to the theme description.
+- Add labels to the theme description;
+
+### Fix
+- Missing style for input with autofill.
 
 
 ## [3.15.1.4]

@@ -3,12 +3,7 @@ const chalk = require('chalk');
 const { Octokit } = require("@octokit/rest");
 const getChangelog = require('../../lib/get-changelog');
 const getPackageInfo = require('../../lib/get-package-info');
-const FormData = require('form-data');
-const got = require("got");
-// const {THEME_PACKAGE_NAME} = require("../../dev-tools-constants");
 require('dotenv').config()
-
-const R2_BUCKET_NAME = 'alps';
 
 const pluginRelease = async (opts) => {
     let env = process.env ;
@@ -23,7 +18,6 @@ const pluginRelease = async (opts) => {
     const buildDir = 'build/';
     const localFileName = `${pkg.name}.zip`;
     const distFileName = `alps-wordpress-v${pkg.version}.zip`;
-    const metadataFileName = `alps-wordpress-v3.json`;
 
     // Extract git tag
     const match = githubRef.match(/^refs\/tags\/(?<tag>v\d+\.\d+\.\d+\.\d+)$/);
@@ -67,6 +61,7 @@ const pluginRelease = async (opts) => {
         repo: githubRepo,
         tag_name: tag,
         name: tag,
+        prerelease: true,
         body: releaseDesc.join("\n"),
     });
 
@@ -78,34 +73,6 @@ const pluginRelease = async (opts) => {
         data: await fs.promises.readFile(`${buildDir}${localFileName}`),
     });
     logger.info(`🍀 Release ${chalk.green(tag)} published on GitHub`);
-
-    const formDataZip = new FormData();
-    formDataZip.append('bucket', R2_BUCKET_NAME);
-    formDataZip.append('path', `/wordpress/themes/alps/alps-wordpress-v${pkg.version}.zip`);
-    formDataZip.append('data', fs.createReadStream(`${buildDir}${localFileName}`));
-
-    await got('https://alps-r2.adventist.workers.dev/upload', {
-        method: 'POST',
-        body: formDataZip,
-        headers: {
-          'Authorization': `Bearer ${env.CLOUDFLARE_R2_ACCESS_TOKEN}`
-        }
-    })
-    logger.info(`🔼 ${chalk.yellow(distFileName)} pushed to R2.`);
-
-    const formDataJson = new FormData();
-    formDataJson.append('bucket', R2_BUCKET_NAME);
-    formDataJson.append('path', '/wordpress/themes/alps/' + metadataFileName);
-    formDataJson.append('data', fs.createReadStream(`${buildDir}${metadataFileName}`));
-
-    await got('https://alps-r2.adventist.workers.dev/upload', {
-      method: 'POST',
-      body: formDataJson,
-      headers: {
-        'Authorization': `Bearer ${env.CLOUDFLARE_R2_ACCESS_TOKEN}`
-      }
-    })
-    logger.info(`🔼 ${chalk.yellow(metadataFileName)} pushed to R2.`);
 };
 
 module.exports = pluginRelease;
