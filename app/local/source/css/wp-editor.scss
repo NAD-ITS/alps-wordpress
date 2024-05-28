@@ -10,6 +10,7 @@
   /*------------------------------------*\
     $BASE
   \*------------------------------------*/
+  @import "base.text";
   @import "base.forms";
   @import "base.headings";
   @import "base.links";
@@ -25,7 +26,6 @@
     $COMPONENTS
   \*------------------------------------*/
   @import "objects.blocks";
-  @import "objects.buttons";
   @import "objects.icons";
   @import "objects.lists";
   @import "objects.forms";
