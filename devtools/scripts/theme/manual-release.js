@@ -32,6 +32,11 @@ const manualRelease = async (opts) => {
     throw new Error(`Invalid tag name for release: "${tag}"`);
   }
 
+  const localStylesDir = 'app/local/alps/';
+  const mainCssName = 'main.css';
+  const headScriptMin = 'head-script.min.js';
+  const scriptMin = 'script.min.js';
+
   const buildDir = 'build/';
   const localFileName = `${pkg.name}.zip`;
   const distFileName = `alps-wordpress-v${pkg.version}.zip`;
@@ -150,6 +155,48 @@ const manualRelease = async (opts) => {
     }
   })
   logger.info(`🔼 ${chalk.yellow(metadataFileName)} pushed to R2.`);
+
+  const mainCssData = new FormData();
+  formDataZip.append('bucket', R2_BUCKET_NAME);
+  formDataZip.append('path', `/wordpress/themes/alps/${mainCssName}`);
+  formDataZip.append('data', fs.createReadStream(`${localStylesDir}/css/${mainCssName}`));
+
+  await got('https://alps-r2.adventist.workers.dev/upload', {
+    method: 'POST',
+    body: mainCssData,
+    headers: {
+      'Authorization': `Bearer ${env.CLOUDFLARE_R2_ACCESS_TOKEN}`
+    }
+  })
+  logger.info(`🔼 ${chalk.yellow(mainCssName)} pushed to R2.`);
+
+  const headScriptMinData = new FormData();
+  formDataZip.append('bucket', R2_BUCKET_NAME);
+  formDataZip.append('path', `/wordpress/themes/alps/${headScriptMin}`);
+  formDataZip.append('data', fs.createReadStream(`${localStylesDir}/js/${headScriptMin}`));
+
+  await got('https://alps-r2.adventist.workers.dev/upload', {
+    method: 'POST',
+    body: headScriptMinData,
+    headers: {
+      'Authorization': `Bearer ${env.CLOUDFLARE_R2_ACCESS_TOKEN}`
+    }
+  })
+  logger.info(`🔼 ${chalk.yellow(headScriptMin)} pushed to R2.`);
+
+  const scriptMinData = new FormData();
+  formDataZip.append('bucket', R2_BUCKET_NAME);
+  formDataZip.append('path', `/wordpress/themes/alps/${scriptMin}`);
+  formDataZip.append('data', fs.createReadStream(`${localStylesDir}/js/${scriptMin}`));
+
+  await got('https://alps-r2.adventist.workers.dev/upload', {
+    method: 'POST',
+    body: scriptMinData,
+    headers: {
+      'Authorization': `Bearer ${env.CLOUDFLARE_R2_ACCESS_TOKEN}`
+    }
+  })
+  logger.info(`🔼 ${chalk.yellow(scriptMin)} pushed to R2.`);
 }
 
 module.exports = manualRelease;
