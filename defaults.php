@@ -82,7 +82,7 @@ update_option( '_footer_description', '[Site URL/Name] is a website of the North
 update_option( '_footer_copyright', 'North American Division of the Seventh-day Adventist church' );
 
 // Fallback Footer Logo Icon (square/circle)
-update_option( '_footer_logo_type', 'circle' );
+update_option( '_footer_logo_type', 'plain' );
 
 // Primary Secondary Navigation
 function auto_nav_creation_primary() {
