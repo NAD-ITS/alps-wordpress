@@ -62,7 +62,7 @@ require_once __DIR__ . '/updater.php';
 $updater = new \ALPS\Theme\ThemeUpdater(
     ALPS_THEME_NAME,
     ALPS_THEME_VERSION,
-    'https://alps.adventistcdn.org/wordpress/themes/alps/alps-wordpress-v3.json'
+    'https://alps.adventistcdn.org/wordpress/themes/alps-nad/alps-wordpress-v3.json'
 );
 $updater->init();
 

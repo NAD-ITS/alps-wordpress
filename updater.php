@@ -49,7 +49,7 @@ class ThemeUpdater
 
             $data = array(
                 'theme' => $stylesheet,
-                'url' => 'https://alps.adventistcdn.org/wordpress/themes/alps/alps-wordpress-v3.json',
+                'url' => 'https://alps.adventistcdn.org/wordpress/themes/alps-nad/alps-wordpress-v3.json',
                 'requires' => $remote->requires,
                 'requires_php' => $remote->requires_php,
                 'new_version' => $remote->version,
