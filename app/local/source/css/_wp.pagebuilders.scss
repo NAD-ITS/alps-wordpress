@@ -4,9 +4,13 @@
 
 // type defaults
 * {
-  font: 400 100% / 1.3 $ff-font;
+  font-family: $ff-font;
+}
+
+p,h1,h2,h3,h4,h5,li {
   color: $c-body-color;
 }
+
 p {
   font-family: $ff-font--primary;
 }
