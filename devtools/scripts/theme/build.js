@@ -58,7 +58,6 @@ const themeBuild = async (opts) => {
     logger.info(`💚 ALPS Theme packaged to ${chalk.yellow(`${pkg.name}.zip`)}`);
   }
 
-
   // // Gather metadata. UNCOMMENT JUST FOR DEV
   // if (!args.dev) {
   //     const themeMeta = {
