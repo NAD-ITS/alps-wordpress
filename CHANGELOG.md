@@ -7,7 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Update
 - Access to remote assets;
 - PHP errors.[#766](https://github.com/adventistchurch/alps-wordpress/issues/766);
-- Conflict with Google Maps API.[#598](https://github.com/adventistchurch/alps/issues/598).
+- Conflict with Google Maps API.[#598](https://github.com/adventistchurch/alps/issues/598);
+- Updates to 50/50 header and block editor css. [#760](https://github.com/adventistchurch/alps-wordpress/issues/760).
 
 ## [3.15.2.5]
 ### Update

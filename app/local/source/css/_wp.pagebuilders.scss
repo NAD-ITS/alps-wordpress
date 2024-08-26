@@ -2,6 +2,19 @@
  * Mods and fixes for page builders
  */
 
+// type defaults
+* {
+  font-family: $ff-font;
+}
+
+p,h1,h2,h3,h4,h5,li {
+  color: $c-body-color;
+}
+
+p {
+  font-family: $ff-font--primary;
+}
+
 // content-width padding for wrappers
 .u-padding--container {
   padding-left: 1.25rem;
