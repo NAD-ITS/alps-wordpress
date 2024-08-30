@@ -158,7 +158,7 @@ const manualRelease = async (opts) => {
 
   const mainCssData = new FormData();
   formDataZip.append('bucket', R2_BUCKET_NAME);
-  formDataZip.append('path', `/wordpress/themes/alps/${mainCssName}`);
+  formDataZip.append('path', `/wordpress/themes/alps-nad/${mainCssName}`);
   formDataZip.append('data', fs.createReadStream(`${localStylesDir}/css/${mainCssName}`));
 
   await got('https://alps-r2.adventist.workers.dev/upload', {
@@ -171,9 +171,9 @@ const manualRelease = async (opts) => {
   logger.info(`🔼 ${chalk.yellow(mainCssName)} pushed to R2.`);
 
   const headScriptMinData = new FormData();
-  formDataZip.append('bucket', R2_BUCKET_NAME);
-  formDataZip.append('path', `/wordpress/themes/alps/${headScriptMin}`);
-  formDataZip.append('data', fs.createReadStream(`${localStylesDir}/js/${headScriptMin}`));
+  headScriptMinData.append('bucket', R2_BUCKET_NAME);
+  headScriptMinData.append('path', `/wordpress/themes/alps-nad/${headScriptMin}`);
+  headScriptMinData.append('data', fs.createReadStream(`${localStylesDir}/js/${headScriptMin}`));
 
   await got('https://alps-r2.adventist.workers.dev/upload', {
     method: 'POST',
@@ -185,9 +185,9 @@ const manualRelease = async (opts) => {
   logger.info(`🔼 ${chalk.yellow(headScriptMin)} pushed to R2.`);
 
   const scriptMinData = new FormData();
-  formDataZip.append('bucket', R2_BUCKET_NAME);
-  formDataZip.append('path', `/wordpress/themes/alps/${scriptMin}`);
-  formDataZip.append('data', fs.createReadStream(`${localStylesDir}/js/${scriptMin}`));
+  scriptMinData.append('bucket', R2_BUCKET_NAME);
+  scriptMinData.append('path', `/wordpress/themes/alps-nad/${scriptMin}`);
+  scriptMinData.append('data', fs.createReadStream(`${localStylesDir}/js/${scriptMin}`));
 
   await got('https://alps-r2.adventist.workers.dev/upload', {
     method: 'POST',
