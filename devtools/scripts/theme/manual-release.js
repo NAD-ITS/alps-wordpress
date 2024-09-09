@@ -157,9 +157,9 @@ const manualRelease = async (opts) => {
   logger.info(`🔼 ${chalk.yellow(metadataFileName)} pushed to R2.`);
 
   const mainCssData = new FormData();
-  formDataZip.append('bucket', R2_BUCKET_NAME);
-  formDataZip.append('path', `/wordpress/themes/alps-nad/${mainCssName}`);
-  formDataZip.append('data', fs.createReadStream(`${localStylesDir}/css/${mainCssName}`));
+  mainCssData.append('bucket', R2_BUCKET_NAME);
+  mainCssData.append('path', `/wordpress/themes/alps-nad/${mainCssName}`);
+  mainCssData.append('data', fs.createReadStream(`${localStylesDir}/css/${mainCssName}`));
 
   await got('https://alps-r2.adventist.workers.dev/upload', {
     method: 'POST',
