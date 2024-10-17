@@ -7,8 +7,10 @@
   font-family: $ff-font;
 }
 
-p,h1,h2,h3,h4,h5,li {
-  color: $c-body-color;
+.editor-styles-wrapper {
+  p,h1,h2,h3,h4,h5,li {
+    color: $c-body-color;
+  }
 }
 
 p {
