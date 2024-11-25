@@ -78,7 +78,6 @@ input[type="submit"] {
 
   &::after,
   &:focus:after {
-    content: "Show";
     display: inline;
   }
 
@@ -86,7 +85,6 @@ input[type="submit"] {
   &.this-is-active {
     &:focus:after,
     &::after {
-      content: "Close";
     }
 
     .u-icon {
@@ -117,14 +115,12 @@ input[type="submit"] {
 
   &::after,
   &:focus:after {
-    content: "Show More";
     display: table-cell;
     position: relative;
     vertical-align: middle;
   }
 
   &::before {
-    content: "+";
     display: table-cell;
     position: relative;
     padding-right: rem(8);
@@ -141,11 +137,6 @@ input[type="submit"] {
   &.this-is-active {
     &:focus:after,
     &::after {
-      content: "Show Less";
-    }
-
-    &::before {
-      content: "-";
     }
   }
 
