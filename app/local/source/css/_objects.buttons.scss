@@ -30,7 +30,6 @@ input[type="submit"] {
 
   &:focus {
     &::before {
-      border-style: dashed;
       border-width: 1px;
       display: block;
       position: absolute;
@@ -38,8 +37,6 @@ input[type="submit"] {
       left: -4px;
       width: calc(100% + 6px);
       height: calc(100% + 6px);
-      border-radius: rem(50);
-      content: "";
     }
   }
 
