@@ -1,4 +1,4 @@
-const sass = require('node-sass');
+const sass = require('sass');
 const fs = require('fs');
 const path = require('path');
 
@@ -36,30 +36,29 @@ if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
 
-filesToCompile.forEach(sourcePath => {
-  const fileName = path.basename(sourcePath);
-  const outputPath = path.join(outputDir, fileName.replace('.scss', '.css'));
+(async () => {
+  console.log('🎯 Compiling styles and js files for ALPS Theme!');
+  console.log('🏃 Run command');
 
-  console.log('🎯 Compiling styles and js files for ALPS Theme!')
-  console.log('🏃 Run command')
+  for (const sourcePath of filesToCompile) {
+    const fileName = path.basename(sourcePath);
+    const outputPath = path.join(outputDir, fileName.replace('.scss', '.css'));
 
-  sass.render({
-    file: sourcePath,
-    outFile: outputPath,
-    outputStyle: 'compressed'
-  }, (err, result) => {
-    if (err) {
-      console.error('Error in compilation process:', err);
-      return;
+    try {
+      const result = await sass.compile(sourcePath, {
+        style: 'compressed'
+      });
+
+      fs.writeFileSync(outputPath, result.css, (err) => {
+        if (err) {
+          console.error('Error while write file:', err);
+        }
+      });
+      console.log(`✅ SUCCESS: ${fileName} compiled to ${outputPath}`);
+    } catch (err) {
+      console.error(`❌ Error in compilation process for ${fileName}:`, err);
     }
+  }
 
-    fs.writeFileSync(outputPath, result.css, (err) => {
-      if (err) {
-        console.error('Error while write file:', err);
-      }
-    });
-  });
-
-  console.log('✅ SUCCESS')
-  console.log('💚 The new version of style, js were compiled successfully!')
-});
+  console.log('💚 The new version of styles and js were compiled successfully!');
+})();
