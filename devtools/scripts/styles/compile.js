@@ -36,34 +36,6 @@ if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
 
-// filesToCompile.forEach(sourcePath => {
-//   const fileName = path.basename(sourcePath);
-//   const outputPath = path.join(outputDir, fileName.replace('.scss', '.css'));
-//
-//   console.log('🎯 Compiling styles and js files for ALPS Theme!')
-//   console.log('🏃 Run command')
-//
-//   sass.render({
-//     file: sourcePath,
-//     outFile: outputPath,
-//     outputStyle: 'compressed'
-//   }, (err, result) => {
-//     if (err) {
-//       console.error('Error in compilation process:', err);
-//       return;
-//     }
-//
-//     fs.writeFileSync(outputPath, result.css, (err) => {
-//       if (err) {
-//         console.error('Error while write file:', err);
-//       }
-//     });
-//   });
-//
-//   console.log('✅ SUCCESS')
-//   console.log('💚 The new version of style, js were compiled successfully!')
-// });
-
 (async () => {
   console.log('🎯 Compiling styles and js files for ALPS Theme!');
   console.log('🏃 Run command');
