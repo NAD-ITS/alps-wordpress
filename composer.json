@@ -24,6 +24,11 @@
       "name": "Brandon Nifong",
       "email": "brandon@tendency.me",
       "homepage": "https://github.com/log1x"
+    },
+    {
+      "name": "Yauheni Kapliarchuk",
+      "email": "yauheni.kapliarchuk@gmail.com",
+      "homepage": "https://github.com/YauheniKapliarchuk"
     }
   ],
   "keywords": [
@@ -40,11 +45,11 @@
   },
   "require": {
     "php": "^8.1",
-    "htmlburger/carbon-fields": "^3.3",
-    "roots/acorn": "^2.0"
+    "htmlburger/carbon-fields": "^v3.6.5",
+    "roots/acorn": "^3.0"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^3.7.2"
+    "squizlabs/php_codesniffer": "^3.11.2"
   },
   "suggest": {
     "log1x/sage-directives": "A collection of useful Blade directives for WordPress and Sage (^1.0).",
