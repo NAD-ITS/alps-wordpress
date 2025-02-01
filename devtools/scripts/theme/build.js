@@ -44,8 +44,14 @@ const themeBuild = async (opts) => {
     /^\/resources/u,
     /^\/assets/u,
   ];
+
+  const excludeList = [
+    'vendor/squizlabs/php_codesniffer/tests/Core/Tokenizers/PHP/ResolveSimpleTokenTest.inc'
+  ];
+
   const pluginFiles = await dirTree('.', {
     whiteList,
+    excludeList: excludeList,
   });
 
   for (const pf of pluginFiles) {
