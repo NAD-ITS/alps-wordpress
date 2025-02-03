@@ -124,7 +124,7 @@ function crb_attach_hero()
 					'full' => __('Full screen image with text overlay (Min/Max Images: 1)', 'alps'),
 					'full_overlay' => __('Full screen image with text and header overlay (Min/Max Images: 1)', 'alps'),
 					'column' => __('Three column image format with text overlays (Min/Max Images: 3)', 'alps'),
-					'carousel' => __('Half screen image gallery with text overlay (Max Images: 6)', 'alps'),
+					'carousel' => __('Half screen image gallery with text overlay (Max Images: 9)', 'alps'),
 				]),
 			Field
 				::make('image', 'hero_image', __('Hero Image', 'alps'))
