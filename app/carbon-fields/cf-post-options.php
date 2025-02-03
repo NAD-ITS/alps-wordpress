@@ -298,7 +298,7 @@ function crb_attach_hero()
 						->set_width(50),
 				])
 				->set_min(1)
-				->set_max(6)
+				->set_max(9)
 		]);
 }
 

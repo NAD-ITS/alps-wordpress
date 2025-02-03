@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fix
 - Security alert from Wordfence. [#785](https://github.com/adventistchurch/alps-wordpress/issues/785)
 
+### Update
+- hero_carousel - increase more slides from 6 to 9. [#792](https://github.com/adventistchurch/alps-wordpress/issues/792)
+
 ## [3.15.2.8]
 ### Update
 - German language support for Gutenberg Blocks. [#549](https://github.com/adventistchurch/alps-wordpress/issues/549)
