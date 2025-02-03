@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 
-const dirTree = async (path, { whiteList = [], rootPath = ''} = {}) => {
+const dirTree = async (path, { whiteList = [], excludeList = [], rootPath = ''} = {}) => {
     const tree = [];
     const files = await fs.readdir(path);
 
@@ -8,9 +8,15 @@ const dirTree = async (path, { whiteList = [], rootPath = ''} = {}) => {
         const filePath = `${path}/${file}`;
         const fileStat = await fs.stat(filePath);
 
+      // Skip excluded files
+      if (excludeList.some(ex => filePath.includes(ex))) {
+        continue;
+      }
+
         if (fileStat.isDirectory()) {
             tree.push(...await dirTree(filePath, {
                 whiteList,
+                excludeList,
                 rootPath: rootPath ? rootPath : path,
             }));
         } else {
