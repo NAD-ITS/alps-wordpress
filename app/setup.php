@@ -168,8 +168,8 @@ add_action('widgets_init', function () {
 // Featured crop.
 add_image_size('featured__hero--s', 500, 400, array('center', 'center'));
 add_image_size('featured__hero--m', 800, 500, array('center', 'center'));
-add_image_size('featured__hero--l', 1100, 500, array('center', 'center'));
-add_image_size('featured__hero--xl', 1600, 600, array('center', 'center'));
+add_image_size('featured__hero--l', 1600, 500, array('center', 'center'));
+add_image_size('featured__hero--xl', 2100, 600, array('center', 'center'));
 
 // 16:9 crop.
 add_image_size('horiz__16x9--s', 500, 280, array('center', 'center'));
@@ -188,8 +188,8 @@ add_image_size('vert__3x4--m', 600, 800, array('center', 'center'));
 // Flexible height
 add_image_size('flex-height--s', 350, 9999);
 add_image_size('flex-height--m', 700, 9999);
-add_image_size('flex-height--l', 900, 9999);
-add_image_size('flex-height--xl', 1100, 9999);
+add_image_size('flex-height--l', 1100, 9999);
+add_image_size('flex-height--xl', 1600, 9999);
 
 // Square
 add_image_size('thumbnail--s', 400, 400, array('center', 'center'));

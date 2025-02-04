@@ -45,6 +45,25 @@
       $block_class = 'c-block__full c-media-block__full l-grid-wrap l-grid-wrap--6-of-7' . $scroll_class;
     }
   }
+  elseif ($hero_type == 'full_without_gradient') {
+    array_push($hero_image,  get_post_meta($post->ID, $cf_.'hero_image', true));
+    $block_group_class = 'u-flex--justify-center';
+    $block_title_class = 'l-grid-item--5-col l-grid-item--m--2-col u-font--primary--xl u-flex--justify-center';
+    $block_title_link_class = 'u-theme--link-hover--lighter';
+    $scroll_class = '';
+    $scroll_hint = get_post_meta($post->ID, $cf_.'hero_scroll_hint', true);
+    if ($scroll_hint) {
+      $scroll_class = ' has-scroll';
+    }
+    if ($extended) {
+      $block_content_class = 'l-grid--7-col l-grid-wrap l-grid-wrap--7-of-7 u-color--white';
+      $block_class = 'c-block__full c-media-block__full' . $scroll_class;
+    }
+    else {
+      $block_content_class = 'l-grid--7-col l-grid-wrap l-grid-wrap--7-of-7 u-color--white';
+      $block_class = 'c-block__full c-media-block__full l-grid-wrap l-grid-wrap--6-of-7' . $scroll_class;
+    }
+  }
   elseif ($hero_type == 'column') {
     $hero_image[] = get_alps_field('hero_column', $post->ID);
     $block_class = 'c-block__column c-media-block__column';
@@ -54,6 +73,9 @@
     $block_title_link_class = 'u-theme--link-hover--light';
   }
   elseif ($hero_type == 'carousel') {
+    $hero_image = get_alps_field('hero_carousel', $post->ID);
+  }
+  elseif ($hero_type == 'carousel_without_text_overlay') {
     $hero_image = get_alps_field('hero_carousel', $post->ID);
   }
   elseif ($hero_type == 'default') {
@@ -80,7 +102,7 @@
       if ($hero_type == 'column') {
         $hero_data = $hero_image[0];
       }
-      elseif ($hero_type == 'carousel') {
+      elseif ($hero_type == 'carousel'  || $hero_type == 'carousel_without_text_overlay') {
         // Fix: convert single slide into array with one element
         if (isset($hero_image['_type'])) {
           $hero_data[] = $hero_image;
@@ -92,7 +114,7 @@
         $hero_data = $hero_image;
       }
     @endphp
-    @if ($hero_type == 'carousel')
+    @if ($hero_type == 'carousel'  || $hero_type == 'carousel_without_text_overlay')
       @include('patterns.01-molecules.components.carousel')
     @else
       @foreach ($hero_data as $image)

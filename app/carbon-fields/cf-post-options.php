@@ -121,10 +121,12 @@ function crb_attach_hero()
 				->add_options([
 					'false' => __('None', 'alps'),
 					'default' => __('Half screen image with text overlay (Min/Max Images: 1)', 'alps'),
-					'full' => __('Full screen image with text overlay (Min/Max Images: 1)', 'alps'),
+					'full' => __('Full screen image with gradient (Min/Max Images: 1)', 'alps'),
+					'full_without_gradient' => __('Full screen image without gradient (Min/Max Images: 1)', 'alps'),
 					'full_overlay' => __('Full screen image with text and header overlay (Min/Max Images: 1)', 'alps'),
 					'column' => __('Three column image format with text overlays (Min/Max Images: 3)', 'alps'),
 					'carousel' => __('Half screen image gallery with text overlay (Max Images: 9)', 'alps'),
+					'carousel_without_text_overlay' => __('Half screen image gallery without text overlay (Max Images: 9)', 'alps'),
 				]),
 			Field
 				::make('image', 'hero_image', __('Hero Image', 'alps'))
@@ -138,6 +140,10 @@ function crb_attach_hero()
 						'field' => 'hero_type',
 						'value' => 'full',
 					],
+					[
+                        'field' => 'hero_type',
+                        'value' => 'full_without_gradient',
+                    ],
 					[
 						'field' => 'hero_type',
 						'value' => 'full_overlay',
@@ -271,10 +277,15 @@ function crb_attach_hero()
 			Field
 				::make('complex', 'hero_carousel', __('Hero Carousel', 'alps'))
 				->set_conditional_logic([
+    				'relation' => 'OR', // Optional, defaults to "AND"
 					[
 						'field' => 'hero_type',
 						'value' => 'carousel',
-					]
+					],
+					[
+                        'field' => 'hero_type',
+                        'value' => 'carousel_without_text_overlay',
+                    ]
 				])
 				// Field names refers to https://github.com/adventistchurch/alps/blob/v3.x/source/_patterns/02-organisms/sections/hero-carousel.json
 				->add_fields([
