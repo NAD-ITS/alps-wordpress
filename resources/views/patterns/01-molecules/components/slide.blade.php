@@ -11,7 +11,7 @@
     <!--[if IE 9]></video><![endif]-->
     <img itemprop="image" srcset="{{ $image_s }}" alt="{{ $alt }}">
   </picture>
-  <div class="c-carousel__item-text__wrap u-theme--background-color-trans--dark">
+  <div class="{{ $hero_type === 'carousel_without_text_overlay' ? 'u-theme--background-color-trans--dark' : 'c-carousel__item-text__wrap u-theme--background-color-trans--dark' }}">
     <div class="l-container">
       <div class="c-carousel__item-text u-spacing--half">
         <div class="c-carousel__item-text--inner">

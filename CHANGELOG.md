@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Update
 - hero_carousel - increase more slides from 6 to 9. [#792](https://github.com/adventistchurch/alps-wordpress/issues/792)
+- WordPress Image Compression Quality. [#779](https://github.com/adventistchurch/alps-wordpress/issues/779)
 
 ## [3.15.2.8]
 ### Update
