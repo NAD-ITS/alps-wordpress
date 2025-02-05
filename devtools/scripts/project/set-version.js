@@ -62,8 +62,6 @@ const createReleaseCommit = async (version) => {
 
 const setVersion = async (opts) => {
     const { logger } = opts;
-1
-    console.log("WWWW: ");
 
     if (!await isWorkdirClean()) {
         logger.error(chalk.bold('❗ Commit all changes before release'));
